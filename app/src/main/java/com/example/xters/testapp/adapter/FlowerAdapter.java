@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.xters.testapp.R;
 import com.example.xters.testapp.model.Flower;
 import com.squareup.picasso.Picasso;
@@ -53,7 +55,10 @@ public class FlowerAdapter extends ArrayAdapter<Flower> {
 
         Flower flower = flowerList.get(position);
         viewHolder.tvFlowerName.setText(flower.getName());
-        Picasso.with(context).load(PHOTO_BASE_URL + flower.getPhoto()).into(viewHolder.ivFlowerImage);
+        Glide.with(context)
+                .load(PHOTO_BASE_URL + flower.getPhoto())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(viewHolder.ivFlowerImage);
         return convertView;
     }
 
